@@ -1,0 +1,34 @@
+<style>
+    tr,th,td{
+        border: 1px solid #dddddd;
+
+    }
+</style>
+<a href="/bookadd">addBook</a><br/>
+<a href="/authoradd">addAuthor</a><br/>
+<a href="/booklist">bookList</a>
+<form method="POST" action="/authorNum">
+    <h4>choisir livre numeros</h4>
+    <label>min</label>
+    <input type="number" name="min" /><br/>
+    <label>max</label>
+    <input type="number" name="max" />
+    <input type="submit" value="choose num"/>
+</form>
+<table>
+    <tr>
+        <th>name</th>
+        <th>email</th>
+        <th>delete</th>
+        <th>update</th>
+    </tr>
+{%for author in authors%}
+<tr>
+    <td>{{author.username}}</td>
+    <td>{{author.email}}</td>
+    <td><a href="{{path( "delete_author",{'id':author.id})}}">delete</a></td>
+    <td><a href="{{path( "update_author",{'id':author.id})}}">update</a></td>
+</tr>
+    
+{%endfor%}
+</table>
