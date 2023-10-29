@@ -1,0 +1,67 @@
+<style>
+    tr,th,td{
+        border: 1px solid #dddddd;
+
+    }
+</style>
+{{msg}}
+<br/>
+<a href="/bookadd">addBook</a><br/>
+<a href="/authoradd">addAuthor</a><br/>
+<a href="/authorlist">Authorlist</a>
+<form method="POST" action="/searchBookByRef">
+    <h4>Book</h4>
+    <input type="text" name="ref" />
+    <input type="submit" value="rech"/>
+</form> 
+
+<form method="POST" action="/searchByAuthor">
+    <h4>Author</h4>
+    <input type="text" name="author" />
+    <input type="submit" value="rechercehr par author"/>
+</form> 
+<form method="POST" action="/searchBookBy10books">
+    <h4>Author 10 books</h4>
+    <input type="submit" value="by 10 books"/>
+</form> 
+<form method="POST" action="/SciencetoRomance">
+    <h4>from science to Romance</h4>
+    <input type="submit" value="from science to Romance"/>
+</form>
+<form method="POST" action="/numberOfRomance">
+    <h4>from science to Romance</h4>
+    {% if number0fRomanceBooks is defined  %}
+        {{number0fRomanceBooks[0][1]}}
+    {% endif %}
+    <input type="submit" value="numberOfRomance"/>
+</form>
+<form method="POST" action="/livresPublies2018">
+    <h4>livresPublies2018</h4>
+    <input type="submit" value="/livresPublies2019"/>
+</form>
+<table>
+    <tr>
+        <th>title</th>
+        <th>publication date</th>
+        <th>Published</th>
+        <th>category</th>
+        <th>Author</th>
+        <th>delete</th>
+        <th>update</th>
+        <th>details</th>
+    </tr>
+{%for book in books%}
+<tr>
+    <td>{{book.title}}</td>
+    <td>{{book.publicationDate |date('Y-m-d H:i:s') }}</td>
+    <td>{{book.published}}</td>
+    <td>{{book.category}}</td>
+    <td>{{book.author.username}}</td>
+    <td><a href="{{path( "delete_book",{'ref':book.ref})}}">delete</a></td>
+    <td><a href="{{path( "update_book",{'ref':book.ref})}}">update</a></td>
+    <td><a href="{{path( "detail_book",{'ref':book.ref})}}">detail</a></td>
+
+</tr>
+    
+{%endfor%}
+</table>
